@@ -1,9 +1,20 @@
 .App {
   text-align: center;
   background-color: #c2185b;
-  height: 100%
+  display: flex;
+  flex-flow: column;
+  min-height: 100%;
 }
-
+@media only screen and (max-height: 820px) {
+  /* For mobile phones: */
+  [class*="wrapper"] {
+     min-height: 100%;
+  }
+}
+.wrapper{
+  min-height: 820px !important;
+  
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -29,5 +40,25 @@
   to { transform: rotate(360deg); }
 }
  .btn{
-   display:block
+   display:block;
+   margin-top: 5%;
+   margin-bottom: 5%
+ }
+ .safety{
+   color:black;
+ }
+ .more{
+   margin-left: auto;
+   margin-right: auto;
+   display:block;
+ }
+ .written{
+   color:white;
+   font-family: comic-sans;
+   font-size: 3em;
+   margin:5px;
+ }
+ .title{
+   color:white;
+   font-style: cursive;
  }

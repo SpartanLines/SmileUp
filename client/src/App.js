@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import {puns} from './stuff';
+import {picks,puns,quotes,facts} from './stuff';
 
 
 class App extends Component {
 
     state = {
       response: '',
+      picks: picks.puns,
+      current_pick:0,
+      facts: facts.facts,
+      current_fact:0,
       puns: puns.puns,
+      current_pun:0,
+      quotes: quotes.quotes,
+      current_quote:0,
       mode:"choose"
       
     };
@@ -31,13 +38,13 @@ class App extends Component {
       this.setState({mode:"puns"});
     }
     pickHandler=()=>{
-      this.setState({mode:"pick"});
+      this.setState({mode:"picks"});
     }
     quoteHandler=()=>{
-      this.setState({mode:"quote"});
+      this.setState({mode:"quotes"});
     }
     factHandler=()=>{
-      this.setState({mode:"fact"});
+      this.setState({mode:"facts"});
     }
     safetyHandler=()=>{
       this.setState({mode:"safety"});
@@ -45,32 +52,90 @@ class App extends Component {
     menuHandler=()=>{
       this.setState({mode:"choose"});
     }
+    nextPun=()=>{
+      let pun_index=this.state.current_pun+1;
+      this.setState({current_pun:pun_index});
+    }
+    nextPick=()=>{
+      let pun_index=this.state.current_pick+1;
+      this.setState({current_pick:pun_index});
+    }
+    nextFact=()=>{
+      let pun_index=this.state.current_fact+1;
+      this.setState({current_fact:pun_index});
+    }
+    nextQuote=()=>{
+      let pun_index=this.state.current_quote+1;
+      this.setState({current_quote:pun_index});
+    }
    
   render() {
+    let mypicks=this.state.picks.map((pick,index)=>(
+      <div key={index}>
+        <h3 className="written">{pick.Puns}</h3>  
+      </div>
+    ));
     let mypuns=this.state.puns.map((pun,index)=>(
       <div key={index}>
-        <h3>{pun.Puns}</h3>  
+        <h3 className="written">{pun.Pun}</h3>  
+      </div>
+    ));
+    let myquotes=this.state.quotes.map((quote,index)=>(
+      <div key={index}>
+        <h3 className="written">{quote.Quotes}</h3>  
+      </div>
+    ));
+    let myfacts=this.state.facts.map((fact,index)=>(
+      <div key={index}>
+        <h3 className="written">{fact.Facts}</h3>  
       </div>
     ));
 
     
     return (
       <div className="App">
-       
+        <div className="wrapper">
         {this.state.mode==="choose"?
-                  <div>
-                  <h1>el 3eeb fehom</h1>
-                  <button className="btn waves-effect waves-light" onClick={this.punHandler}>Puns </button>
-                  <button className="btn waves-effect waves-light" onClick={this.pickHandler}>Pick Me Up! </button>      
-                  <button className="btn waves-effect waves-light" onClick={this.factHandler}>Facts </button>
-                  <button className="btn waves-effect waves-light" onClick={this.quoteHandler}>Inspire Me! </button>
+                  <div className="row">
+                  <h1 className="title">Smile UP</h1>
+                  <h6 className="title">el 3eeb fehom</h6>
+                  <button className="btn waves-effect waves-light col s10 offset-s1 z-depth-3" onClick={this.punHandler}>Puns </button>
+                  <button className="btn waves-effect waves-light col s10 offset-s1" onClick={this.pickHandler}>Pick Me Up! </button>      
+                  <button className="btn waves-effect waves-light col s10 offset-s1" onClick={this.factHandler}>Facts </button>
+                  <button className="btn waves-effect waves-light col s10 offset-s1" onClick={this.quoteHandler}>Inspire Me! </button>
+                  <button className="btn waves-effect waves-light col s10 offset-s1 red safety pulse" onClick={this.quoteHandler}>Safety </button>
+
                   </div>
-        :this.state.mode==="puns"?
+        :null}
+        {this.state.mode==="picks"? 
         <div>
-         <button onClick={this.menuHandler}>back</button> 
-        {mypuns}
+          <h1>Pick Up Lines </h1>
+         <button className="btn blue" onClick={this.menuHandler}> GET ME OUT OF HEREE! </button> 
+        {mypicks[this.state.current_pick]}
+        <button onClick={this.nextPick} className="btn waves-effect waves-light col s8 offset-s2 more">ANOTHER ONE!</button>
+        </div>:null}{
+          this.state.mode==="puns"?
+        <div>
+           <h1>Puns</h1>
+           <button className="btn blue" onClick={this.menuHandler}>GET ME OUT OF HEREE! </button> 
+        {mypuns[this.state.current_pun]}
+        <button onClick={this.nextPun} className="btn waves-effect waves-light col s8 offset-s2 more">ANOTHER ONE!</button>
+        </div>:null}{this.state.mode==="facts"?
+        <div>
+           <h1>Facts</h1>
+           <button className="btn blue" onClick={this.menuHandler}>GET ME OUT OF HEREE! </button> 
+        {myfacts[this.state.current_fact]}
+        <button onClick={this.nextFact} className="btn waves-effect waves-light col s8 offset-s2 more">ANOTHER ONE!</button>
+        </div>:null}{this.state.mode==="quotes"?
+        <div>
+           <h1>Quotes</h1>
+           <button className="btn blue" onClick={this.menuHandler}>GET ME OUT OF HEREE! </button> 
+        {myquotes[this.state.current_quote]}
+        <button onClick={this.nextQuote} className="btn waves-effect waves-light col s8 offset-s2 more">ANOTHER ONE!</button>
         </div>:null
         }
+    
+      </div>
       </div>
     );
   }
