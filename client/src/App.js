@@ -99,7 +99,7 @@ class App extends Component {
         {this.state.mode==="choose"?
                   <div className="row">
                   <h1 className="title">Smile UP</h1>
-                  <h6 className="title">el 3eeb fehom</h6>
+                  <h5 className="title">3oom wetmakhtar</h5>
                   <button className="btn waves-effect waves-light col s10 offset-s1 z-depth-3" onClick={this.punHandler}>Puns </button>
                   <button className="btn waves-effect waves-light col s10 offset-s1" onClick={this.pickHandler}>Pick Me Up! </button>      
                   <button className="btn waves-effect waves-light col s10 offset-s1" onClick={this.factHandler}>Facts </button>
