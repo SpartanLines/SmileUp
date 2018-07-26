@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ReactAudioPlayer from 'react-audio-player';
 import './App.css';
 import {picks,puns,quotes,facts} from './stuff';
 
@@ -54,6 +54,7 @@ class App extends Component {
     }
     nextPun=()=>{
       let pun_index=this.state.current_pun+1;
+    
       this.setState({current_pun:pun_index});
     }
     nextPick=()=>{
@@ -103,7 +104,7 @@ class App extends Component {
                   <button className="btn waves-effect waves-light col s10 offset-s1" onClick={this.pickHandler}>Pick Me Up! </button>      
                   <button className="btn waves-effect waves-light col s10 offset-s1" onClick={this.factHandler}>Facts </button>
                   <button className="btn waves-effect waves-light col s10 offset-s1" onClick={this.quoteHandler}>Inspire Me! </button>
-                  <button className="btn waves-effect waves-light col s10 offset-s1 red safety pulse" onClick={this.quoteHandler}>Safety </button>
+                  <button className="btn waves-effect waves-light col s10 offset-s1 red safety pulse" onClick={this.safetyHandler}>Safety </button>
 
                   </div>
         :null}
@@ -133,7 +134,14 @@ class App extends Component {
         {myquotes[this.state.current_quote]}
         <button onClick={this.nextQuote} className="btn waves-effect waves-light col s8 offset-s2 more">ANOTHER ONE!</button>
         </div>:null
+        }{this.state.mode==="safety"?
+        <div>
+           <h1>Alarm</h1>
+           <button className="btn blue" onClick={this.menuHandler}>GET ME OUT OF HEREE! </button> 
+           <ReactAudioPlayer src="old-fashioned-door-bell-daniel_simon.mp3" controls autoPlay loop className="audio" />
+        </div>:null
         }
+        
     
       </div>
       </div>
